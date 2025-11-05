@@ -1,0 +1,17 @@
+*.local
+*.log
+.DS_Store
+.dev.vars*
+.env
+.env.json
+.pnpm-store
+.sonda
+.vscode/*
+.wrangler
+dist
+generated
+logs
+node-compile-cache
+node_modules
+pnpm-debug.log*
+sonda-report.html

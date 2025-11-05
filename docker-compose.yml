@@ -1,0 +1,25 @@
+name: ztest
+
+services:
+  db:
+    image: postgres:16.2-alpine
+    command: |
+      postgres 
+      -c hot_standby=on 
+      -c hot_standby_feedback=on
+      -c max_replication_slots=5 
+      -c max_wal_senders=10 
+      -c wal_level=logical
+    container_name: db
+    environment:
+      - POSTGRES_DB=ztest_dev
+      - POSTGRES_PASSWORD=postgres
+    labels:
+      - dev.orbstack.domains=db.ztest.local
+    ports:
+      - 5432:5432
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:

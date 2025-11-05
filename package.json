@@ -1,0 +1,59 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "biome check . --fix --unsafe",
+    "check:types": "pnpm check:types:api && pnpm check:types:node",
+    "check:types:api": "tsc -p config/tsconfig/api.json",
+    "check:types:node": "tsc -p config/tsconfig/node.json",
+    "db:codegen": "node scripts/codegen/index.ts",
+    "db:connect": "docker exec -it db psql -U postgres -d ztest_dev",
+    "db:migrate": "kysely migrate",
+    "db:make": "kysely migrate make",
+    "gen:types": "wrangler types generated/worker-configuration.d.ts --config wrangler.push.jsonc",
+    "preinstall": "pnpx only-allow pnpm",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@rocicorp/zero": "0.24.2025101500",
+    "hono": "^4.10.3",
+    "kysely": "~0.28.8",
+    "kysely-postgres-js": "^3.0.0",
+    "nanoid": "^5.1.6",
+    "postgres": "^3.4.7",
+    "remeda": "^2.21.3",
+    "zod": "^4.1.11"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.3.2",
+    "@faker-js/faker": "^9.6.0",
+    "@testcontainers/postgresql": "^10.24.0",
+    "@types/node": "^24.9.1",
+    "kysely-ctl": "~0.19.0",
+    "testcontainers": "^10.24.0",
+    "typescript": "^5.9.3",
+    "vite": "^6.2.0",
+    "vitest": "~3.2.4",
+    "wrangler": "^4.20.1"
+  },
+  "trustedDependencies": [
+    "@rocicorp/zero-sqlite3"
+  ],
+  "packageManager": "pnpm@10.20.0",
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "^24.10.0",
+      "onFail": "download"
+    }
+  },
+  "pnpm": {
+    "minimumReleaseAge": 1440,
+    "onlyBuiltDependencies": [
+      "@rocicorp/zero-sqlite3"
+    ],
+    "overrides": {
+      "chalk-template>chalk": "^5.3.0"
+    }
+  }
+}

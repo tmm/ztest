@@ -1,0 +1,97 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.3.2/schema.json",
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on",
+        "useSortedAttributes": "on",
+        "useSortedProperties": "on"
+      }
+    }
+  },
+  "css": {
+    "formatter": {
+      "enabled": true
+    },
+    "linter": {
+      "enabled": true
+    },
+    "parser": {
+      "tailwindDirectives": true
+    }
+  },
+  "files": {
+    "includes": ["**", "!**/dist"]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "double",
+      "trailingCommas": "all",
+      "semicolons": "asNeeded"
+    }
+  },
+  "json": {
+    "formatter": {
+      "enabled": true
+    },
+    "linter": {
+      "enabled": true
+    },
+    "parser": {
+      "allowTrailingCommas": true
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "complexity": {
+        "noCommaOperator": "error",
+        "useNumericLiterals": "error",
+        "noArguments": "error"
+      },
+      "correctness": {
+        "noInvalidPositionAtImportRule": "off",
+        "noUnusedVariables": "off",
+        "useExhaustiveDependencies": "error"
+      },
+      "nursery": {
+        "noFloatingPromises": "error"
+      },
+      "recommended": true,
+      "style": {
+        "useLiteralEnumMembers": "error",
+        "useNodejsImportProtocol": "error",
+        "useAsConstAssertion": "error",
+        "useEnumInitializers": "error",
+        "useSelfClosingElements": "error",
+        "useConst": "error",
+        "useSingleVarDeclarator": "error",
+        "noUnusedTemplateLiteral": "error",
+        "useNumberNamespace": "error",
+        "noInferrableTypes": "error",
+        "useExponentiationOperator": "error",
+        "useTemplate": "error",
+        "noParameterAssign": "error",
+        "noNonNullAssertion": "off",
+        "useDefaultParameterLast": "error",
+        "useImportType": "error",
+        "useExportType": "error",
+        "noUselessElse": "error",
+        "useShorthandFunctionType": "error"
+      },
+      "suspicious": {
+        "noNonNullAssertedOptionalChain": "warn"
+      }
+    }
+  },
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  }
+}

@@ -1,0 +1,29 @@
+name: 'pnpm'
+
+inputs:
+  node-version:
+    required: true
+  working-directory:
+    default: '.'
+    required: false
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set up pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        package_json_file: ${{ inputs.working-directory }}/package.json
+
+    - name: Setup Node.js with pnpm cache
+      uses: actions/setup-node@v4
+      with:
+        cache: pnpm
+        cache-dependency-path: ${{ inputs.working-directory }}/pnpm-lock.yaml
+        node-version: ${{ inputs.node-version }}
+
+    - name: Install dependencies
+      working-directory: ${{ inputs.working-directory }}
+      run: pnpm install
+      shell: bash
+

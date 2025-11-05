@@ -1,0 +1,22 @@
+// https://developers.cloudflare.com/workers/wrangler/configuration
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "push",
+  "main": "api/index.push.ts",
+  "compatibility_date": "2025-04-04",
+  "compatibility_flags": ["nodejs_compat"],
+  "hyperdrive": [
+    {
+      "binding": "DB",
+      "id": "613108cb5daf4f9392ffc1fe3c43d082",
+      "localConnectionString": "postgresql://postgres:postgres@db.ztest.local:5432/ztest_dev"
+    }
+  ],
+  "observability": {
+    "enabled": true
+  },
+  "workers_dev": false,
+  "vars": {
+    "APP_URL": "https://ztest.local"
+  }
+}

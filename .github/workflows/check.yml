@@ -1,0 +1,54 @@
+name: Check
+on:
+  workflow_call:
+  workflow_dispatch:
+permissions:
+  contents: read
+
+jobs:
+  app:
+    name: app
+    env:
+      DB_URL: postgres://postgres:postgres@localhost:5432/postgres
+    outputs:
+      artifact_id: ${{ steps.upload-artifact.outputs.artifact-id }}
+    runs-on: ubuntu-latest
+    services:
+      db:
+        image: postgres:16.2-alpine
+        env:
+          POSTGRES_DB: postgres
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-retries 5
+          --health-timeout 5s
+        ports: ['5432:5432']
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install dependencies
+      uses: ./.github/actions/pnpm
+      with:
+        node-version: 24.10.0
+
+    - name: Check code
+      run: pnpm check
+
+    - name: Test migrations
+      run: pnpm db:migrate latest
+
+    - name: Generate code
+      run: |
+        pnpm db:codegen
+        cp .dev.vars.example .dev.vars
+        pnpm gen:types
+        rm .dev.vars
+
+    - name: Check types
+      run: pnpm check:types
+
+    - name: Test
+      run: pnpm test
